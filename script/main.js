@@ -1,10 +1,10 @@
 let prevBtn = document.querySelector('.prev');
 let nextBtn = document.querySelector('.next');
 let mainSlidesArea = document.querySelector('.slides');
-let mainDots = document.querySelectorAll('.slide-dot');
+let mainDots = document.getElementsByClassName('slide-dot');
 let mainDotsArea = document.querySelector('.slider-dots');
 let mainSlider = document.querySelector('.slider');
-let miniDots = document.querySelectorAll('.mini-slide-dot');
+let miniDots = document.getElementsByClassName('mini-slide-dot');
 let miniDotsArea = document.querySelector('.mini-slider-dots');
 let miniSlidesArea = document.querySelector('.mini-slides');
 let miniSlides = document.querySelector('.mini-slide');
@@ -12,20 +12,38 @@ let miniSlider = document.querySelector('.mini-slider');
 let modal = document.getElementById('myModal');
 let modContTitle = document.querySelector('.modal-content-title');
 let modContText = document.querySelector('.modal-content-text');
+let modCont = document.querySelector('.modal-content');
 let moreBtn = document.querySelectorAll('.button');
-let btnCloseModal = document.querySelector('.modal-close');
+let btnCloseModal = document.querySelectorAll('.modal-close');
+let slides = document.querySelectorAll('.slide');
+let modalImg = document.querySelector('.modal-img');
+let sliderBtns = document.querySelectorAll('.slider-button');
 let leftIndent = 0;
 
 let interval = setInterval(function() {scrollFunc(-100)}, 3000);
+let quantitySlides = slides.length;
+
+mainSlidesArea.style.width = (quantitySlides * 100) + "%";
+
+for (let i = 0; i < quantitySlides; i++) {
+  let createDotsMain = document.createElement('div');
+  let createDotsMini = document.createElement('div');
+  mainDotsArea.appendChild(createDotsMain);
+  miniDotsArea.appendChild(createDotsMini);
+  createDotsMini.className = "mini-slide-dot";
+  createDotsMain.className = "slide-dot";
+}
+
+mainDots[0].classList.add('active');
+miniDots[0].classList.add('active');
 
 function scrollFunc(n) {
-    
   leftIndent += n;
   
-  if (leftIndent <= -600) {
+  if (leftIndent <= -(quantitySlides) * 100) {
     leftIndent = 0;
   } else if (leftIndent > 0) {
-    leftIndent = -500;
+    leftIndent = -(quantitySlides - 1) * 100;
   }
   
   mainSlidesArea.style.left = `${leftIndent}%`;
@@ -74,6 +92,9 @@ miniDotsArea.addEventListener('click', function(e) {
 });
 
 mainSlider.addEventListener('mouseover', function() {
+  for (let i = 0; i < sliderBtns.length; i++) {
+    sliderBtns[i].style.opacity = "1";
+  }
   clearInterval(interval);
 });
 
@@ -82,32 +103,50 @@ miniSlider.addEventListener('mouseover', function() {
 });
 
 mainSlider.addEventListener('mouseout', function() {
-    interval = setInterval(function() {scrollFunc(-100)}, 3000);
+  for (let i = 0; i < sliderBtns.length; i++) {
+    sliderBtns[i].style.opacity = "0";
+  }
+  interval = setInterval(function() {scrollFunc(-100)}, 3000);
 });
 
 for (let i = 0;i < moreBtn.length; i++) {
   moreBtn[i].addEventListener('click', function(e){
     let currentBtn = e.currentTarget;
-    let modalTitle = currentBtn.parentElement.children[0].textContent; 
+    let modalTitle = currentBtn.parentElement.children[0].textContent;
     modContTitle.textContent = modalTitle;
     let modalContent = currentBtn.parentElement.children[1].textContent;
     modContText.textContent = modalContent;
-    modal.style.display = "block"; 
+    modal.style.display = "block";
+    modCont.style.display = "block";
+    modalImg.style.display = "none";
     clearInterval(interval);
   });
 }
 
-window.onclick = function(e) {
+window.addEventListener('click', function(e) {
   if (e.target == modal) {
     modal.style.display = "none";
     interval = setInterval(function() {scrollFunc(-100)}, 3000); 
   }
-}
+})
 
-btnCloseModal.addEventListener('click', function() {
-  modal.style.display = "none";
-});
+for ( let i = 0; i < btnCloseModal.length; i++) {
+  btnCloseModal[i].addEventListener('click', function(e) {
+    modal.style.display = "none";
+  });
+}
 
 modal.addEventListener('mouseover', function() {
   clearInterval(interval);
+});
+
+document.addEventListener('click', function(e) {
+  for(let i = 0; i < slides.length; i++) {
+    if (e.target === slides[i]) {     
+      modalImg.style.backgroundImage = `url(./image/japan${[i]}.jpg)`;
+      modalImg.style.display = "block";
+      modal.style.display = "block";
+      modCont.style.display = "none"; 
+    }
+  }
 });

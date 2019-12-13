@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>popup</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+		}
+
+		.test {
+			height: 2000em;
+		}
+
+		button {
+			margin: 40px;
+			border: 1px solid red;
+			background: orange;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		.popup-wrapper {
+			display: none;
+			position: fixed;
+			background-color: rgba(0,0,0,.6);
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		.popup-inner {
+			width: 600px;
+			height: 600px;
+			background-color: #fff;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -300px 0 0 -300px;
+			padding: 40px;
+		}
+
+		.popup-close {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<button data-popup='1'>show popup</button>
+	<button data-popup='2'>show popup2</button>
+	<button data-popup='3'>show popup3</button>
+	<div class="popup-wrapper" id="popup1">
+		<div class="popup-inner">
+			<a href="http://google.com" class="popup-close">close</a>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ducimus illo voluptatum rerum atque cumque, fugit culpa, dolorem minus, dolores optio laudantium repudiandae commodi dignissimos corrupti saepe. Quod, doloribus, possimus.</p>
+		</div>
+	</div>
+	<div class="popup-wrapper" id="popup2">
+		<div class="popup-inner">
+			<a href="http://google.com" class="popup-close">close</a>
+			<p>Lorem ipsum2 dolor sit amet, consectetur adipisicing elit. Cum ducimus illo voluptatum rerum atque cumque, fugit culpa, dolorem minus, dolores optio laudantium repudiandae commodi dignissimos corrupti saepe. Quod, doloribus, possimus.</p>
+		</div>
+	</div>
+	<div class="popup-wrapper" id="popup3">
+		<div class="popup-inner">
+			<a href="http://google.com" class="popup-close">close</a>
+			<p>Lorem ipsum3 dolor sit amet, consectetur adipisicing elit. Cum ducimus illo voluptatum rerum atque cumque, fugit culpa, dolorem minus, dolores optio laudantium repudiandae commodi dignissimos corrupti saepe. Quod, doloribus, possimus.</p>
+		</div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>

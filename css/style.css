@@ -135,7 +135,7 @@ h1 {
 .mini-slides {
     display: flex;  
     position: absolute;
-    width: 600%;
+    /* width: 600%; */
     height: 100%;
 }
 

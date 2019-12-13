@@ -23,7 +23,8 @@ let leftIndent = 0;
 let interval = setInterval(function() {scrollFunc(-100)}, 3000);
 let quantitySlides = slides.length;
 
-mainSlidesArea.style.width = (quantitySlides * 100) + "%";
+mainSlidesArea.style.width = `${quantitySlides * 100}%`;
+miniSlidesArea.style.width = `${quantitySlides * 100}%`;
 
 for (let i = 0; i < quantitySlides; i++) {
   let createDotsMain = document.createElement('div');
